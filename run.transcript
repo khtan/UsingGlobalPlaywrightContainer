@@ -1,0 +1,22 @@
+"----------------------"
+"--- Tests in testOnlyA"
+"----------------------"
+
+Running 2 tests using 2 workers
+
+New1 current directory:  /tests/tests
+  ✓  tests/example.spec.ts:14:3 › New1 › should allow me to add todo items (804ms)
+  ✓  tests2/example2.spec.ts:14:3 › New2 › should clear text input field when an item is added (809ms)
+
+
+  2 passed (1s)
+"----------------------"
+"--- Tests in testOnlyB
+"----------------------"
+
+Running 1 test using 1 worker
+
+  ✓  tests/example.spec.ts:14:3 › New3 › should append new items to the bottom of the list (746ms)
+
+
+  1 passed (1s)
