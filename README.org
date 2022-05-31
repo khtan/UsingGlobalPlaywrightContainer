@@ -62,8 +62,13 @@ The general idea is to :
       docker run --volume {ROOTDIR}\testOnlyA:tests -it --rm --ipc=host tankh1/pw4:v2 /bin/bash
 #+END_SRC
 
+When running in a host tests folder, it is important to ensure there is no node_modules directory, otherwise the Docker Playwright
+might get confused.
+
+It is fine to have playwright.config.ts file because the Docker Playwright will read and process it correctly.
+
 In the repo, the folder 'testOnlyA' contains two test folders 'tests' and 'tests2'. Note that there are no node_modules
-nor playwright.config.ts files. Only the package.json is present.
+nor playwright.config.ts files. This is to keep things simple. Only the package.json is present.
 
 The folder 'testOnlyB' is even simpler. There are no node_modules or package* files. Only the tests folder
 is available.

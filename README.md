@@ -1,25 +1,25 @@
 
 # Table of Contents
 
-1.  [UsingGlobalPlaywrightContainer](#org325541a)
-    1.  [General reasons why a global Playwright container is not well received](#org47096be)
-    2.  [The need for a global Playwright container image](#org68928b2)
-2.  [Solution](#org9e95500)
-    1.  [Development environment](#orgdc35017)
-    2.  [Dockerfile and public image](#org3b97730)
-    3.  [Run script: run.bat](#org0811e90)
-3.  [References](#org2b9a935)
+1.  [UsingGlobalPlaywrightContainer](#org71d6c4d)
+    1.  [General reasons why a global Playwright container is not well received](#org2ca4943)
+    2.  [The need for a global Playwright container image](#org671eb97)
+2.  [Solution](#org953f812)
+    1.  [Development environment](#org5b0ee72)
+    2.  [Dockerfile and public image](#orge1e32f7)
+    3.  [Run script: run.bat](#org03d227a)
+3.  [References](#org49101bb)
 
 
 
-<a id="org325541a"></a>
+<a id="org71d6c4d"></a>
 
 # UsingGlobalPlaywrightContainer
 
 A proof of concept for using a Docker image where Playwright is installed globally
 
 
-<a id="org47096be"></a>
+<a id="org2ca4943"></a>
 
 ## General reasons why a global Playwright container is not well received
 
@@ -45,7 +45,7 @@ we can trace the binaries to the source files, this is not always necessary for 
 seems inefficient as a Docker build is required every time a set of tests need to be released to run.
 
 
-<a id="org68928b2"></a>
+<a id="org671eb97"></a>
 
 ## The need for a global Playwright container image
 
@@ -53,19 +53,19 @@ Hence, there is a legitimate need to be able create a Docker image for Playwrigh
 environment, eg Ubuntu, and not bake in the tests. This image can then be used repeatedly on different test folders.
 
 
-<a id="org9e95500"></a>
+<a id="org953f812"></a>
 
 # Solution
 
 
-<a id="orgdc35017"></a>
+<a id="org5b0ee72"></a>
 
 ## Development environment
 
 This project was developed on a Windows 10 machine, running Docker Desktop with containers set to Linux.
 
 
-<a id="org3b97730"></a>
+<a id="orge1e32f7"></a>
 
 ## Dockerfile and public image
 
@@ -79,7 +79,7 @@ explanation, please let me know. Thanks in advance! )
 The public globally installed Playwright image is available in DockerHub khtan1/pw4:v2
 
 
-<a id="org0811e90"></a>
+<a id="org03d227a"></a>
 
 ## Run script: run.bat
 
@@ -101,8 +101,13 @@ The general idea is to :
 
     docker run --volume {ROOTDIR}\testOnlyA:tests -it --rm --ipc=host tankh1/pw4:v2 /bin/bash
 
+When running in a host tests folder, it is important to ensure there is no node\_modules directory, otherwise the Docker Playwright
+might get confused.
+
+It is fine to have playwright.config.ts file because the Docker Playwright will read and process it correctly.
+
 In the repo, the folder 'testOnlyA' contains two test folders 'tests' and 'tests2'. Note that there are no node\_modules
-nor playwright.config.ts files. Only the package.json is present.
+nor playwright.config.ts files. This is to keep things simple. Only the package.json is present.
 
 The folder 'testOnlyB' is even simpler. There are no node\_modules or package\* files. Only the tests folder
 is available.
@@ -110,7 +115,7 @@ is available.
 The file run.transcript shows the results of one such invocation, so that you can compare with your own run.
 
 
-<a id="org2b9a935"></a>
+<a id="org49101bb"></a>
 
 # References
 
