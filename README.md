@@ -1,25 +1,26 @@
 
 # Table of Contents
 
-1.  [UsingGlobalPlaywrightContainer](#org1be31a1)
-    1.  [General reasons why a global Playwright container is not well received](#orgeb77d92)
-    2.  [The need for a global Playwright container image](#orga354f7b)
-2.  [Solution](#org554a054)
-    1.  [Development environment](#orga2d7c08)
-    2.  [Dockerfile and public image](#org052c1c3)
-    3.  [Run script: run.bat](#orgf1ee2a5)
-3.  [References](#orgefee006)
+1.  [UsingGlobalPlaywrightContainer](#org16cf0d7)
+    1.  [General reasons why a global Playwright container is not well received](#orgc099e8c)
+    2.  [The need for a global Playwright container image](#orgb068e8f)
+2.  [Solution](#orga61d274)
+    1.  [Development environment](#orge5e2bf9)
+    2.  [Folders and files](#org78ecf76)
+    3.  [Dockerfile and public image](#orge63ff3a)
+    4.  [Run script: run.bat](#org99dffe8)
+3.  [References](#orgec5eb87)
 
 
 
-<a id="org1be31a1"></a>
+<a id="org16cf0d7"></a>
 
 # UsingGlobalPlaywrightContainer
 
 A proof of concept for using a Docker image where Playwright is installed globally
 
 
-<a id="orgeb77d92"></a>
+<a id="orgc099e8c"></a>
 
 ## General reasons why a global Playwright container is not well received
 
@@ -45,7 +46,7 @@ we can trace the binaries to the source files, this is not always necessary for 
 seems inefficient as a Docker build is required every time a set of tests need to be released to run.
 
 
-<a id="orga354f7b"></a>
+<a id="orgb068e8f"></a>
 
 ## The need for a global Playwright container image
 
@@ -57,19 +58,58 @@ and "Installing Playwright globally in a Docker container". The reason is becaus
 and no other. Thus there is no danger of package versioning hell when using the global Playwright container, unlike a general machine.
 
 
-<a id="org554a054"></a>
+<a id="orga61d274"></a>
 
 # Solution
 
 
-<a id="orga2d7c08"></a>
+<a id="orge5e2bf9"></a>
 
 ## Development environment
 
 This project was developed on a Windows 10 machine, running Docker Desktop with containers set to Linux.
 
 
-<a id="org052c1c3"></a>
+<a id="org78ecf76"></a>
+
+## Folders and files
+
+In the repo, the folder 'testOnlyA' contains two test folders 'tests' and 'tests2'. Note that there are no node\_modules
+nor playwright.config.ts files. This is to keep things simple. Only the package.json is present.
+
+The folder 'testOnlyB' is even simpler. There are no node\_modules or package\* files. Only the tests folder
+is available.
+
+The file run.transcript shows the results of one such invocation, so that you can compare with your own run.
+
+    c:\cprojects\github\khtan\UsingGlobalPlaywrightContainer>tree /f
+    Folder PATH listing
+    Volume serial number is 22B2-40C1
+    C:.
+    │   .gitignore
+    │   Dockerfile
+    │   LICENSE
+    │   README.md
+    │   README.org
+    │   run.bat
+    │   run.log
+    │   run.transcript
+    │
+    ├───testOnlyA
+    │   │   package.json
+    │   │
+    │   ├───tests
+    │   │       example.spec.ts
+    │   │
+    │   └───tests2
+    │           example2.spec.ts
+    │
+    └───testOnlyB
+        └───tests
+                example.spec.ts
+
+
+<a id="orge63ff3a"></a>
 
 ## Dockerfile and public image
 
@@ -83,7 +123,7 @@ explanation, please let me know. Thanks in advance! )
 The public globally installed Playwright image is available in DockerHub khtan1/pw4:v2
 
 
-<a id="orgf1ee2a5"></a>
+<a id="org99dffe8"></a>
 
 ## Run script: run.bat
 
@@ -114,16 +154,8 @@ might get confused.
 
 It is fine to have playwright.config.ts file because the Docker Playwright will read and process it correctly.
 
-In the repo, the folder 'testOnlyA' contains two test folders 'tests' and 'tests2'. Note that there are no node\_modules
-nor playwright.config.ts files. This is to keep things simple. Only the package.json is present.
 
-The folder 'testOnlyB' is even simpler. There are no node\_modules or package\* files. Only the tests folder
-is available.
-
-The file run.transcript shows the results of one such invocation, so that you can compare with your own run.
-
-
-<a id="orgefee006"></a>
+<a id="orgec5eb87"></a>
 
 # References
 

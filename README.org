@@ -36,6 +36,43 @@ and no other. Thus there is no danger of package versioning hell when using the 
 ** Development environment
 This project was developed on a Windows 10 machine, running Docker Desktop with containers set to Linux.
 
+** Folders and files
+In the repo, the folder 'testOnlyA' contains two test folders 'tests' and 'tests2'. Note that there are no node_modules
+nor playwright.config.ts files. This is to keep things simple. Only the package.json is present.
+
+The folder 'testOnlyB' is even simpler. There are no node_modules or package* files. Only the tests folder
+is available.
+
+The file run.transcript shows the results of one such invocation, so that you can compare with your own run.
+
+#+BEGIN_SRC cmd
+c:\cprojects\github\khtan\UsingGlobalPlaywrightContainer>tree /f
+Folder PATH listing
+Volume serial number is 22B2-40C1
+C:.
+│   .gitignore
+│   Dockerfile
+│   LICENSE
+│   README.md
+│   README.org
+│   run.bat
+│   run.log
+│   run.transcript
+│
+├───testOnlyA
+│   │   package.json
+│   │
+│   ├───tests
+│   │       example.spec.ts
+│   │
+│   └───tests2
+│           example2.spec.ts
+│
+└───testOnlyB
+    └───tests
+            example.spec.ts
+#+END_SRC
+
 ** Dockerfile and public image
 The Dockerfile in the repo was used to create the global Playwright container.
 The key steps to make a public Playwright work is quite simple and straightforward, so see the comments
@@ -73,14 +110,6 @@ When running in a host tests folder, it is important to ensure there is no node_
 might get confused.
 
 It is fine to have playwright.config.ts file because the Docker Playwright will read and process it correctly.
-
-In the repo, the folder 'testOnlyA' contains two test folders 'tests' and 'tests2'. Note that there are no node_modules
-nor playwright.config.ts files. This is to keep things simple. Only the package.json is present.
-
-The folder 'testOnlyB' is even simpler. There are no node_modules or package* files. Only the tests folder
-is available.
-
-The file run.transcript shows the results of one such invocation, so that you can compare with your own run.
 
 * References
 This POC is based on earlier inquiries and suggestions provided by others in them:
