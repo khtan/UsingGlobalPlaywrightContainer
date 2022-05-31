@@ -1,25 +1,25 @@
 
 # Table of Contents
 
-1.  [UsingGlobalPlaywrightContainer](#org71d6c4d)
-    1.  [General reasons why a global Playwright container is not well received](#org2ca4943)
-    2.  [The need for a global Playwright container image](#org671eb97)
-2.  [Solution](#org953f812)
-    1.  [Development environment](#org5b0ee72)
-    2.  [Dockerfile and public image](#orge1e32f7)
-    3.  [Run script: run.bat](#org03d227a)
-3.  [References](#org49101bb)
+1.  [UsingGlobalPlaywrightContainer](#orgff8859f)
+    1.  [General reasons why a global Playwright container is not well received](#orgdda09f4)
+    2.  [The need for a global Playwright container image](#orgffd8a15)
+2.  [Solution](#orgecc910f)
+    1.  [Development environment](#org5eed85f)
+    2.  [Dockerfile and public image](#orgbeeaf7d)
+    3.  [Run script: run.bat](#org220f87d)
+3.  [References](#orge19b341)
 
 
 
-<a id="org71d6c4d"></a>
+<a id="orgff8859f"></a>
 
 # UsingGlobalPlaywrightContainer
 
 A proof of concept for using a Docker image where Playwright is installed globally
 
 
-<a id="org2ca4943"></a>
+<a id="orgdda09f4"></a>
 
 ## General reasons why a global Playwright container is not well received
 
@@ -45,27 +45,31 @@ we can trace the binaries to the source files, this is not always necessary for 
 seems inefficient as a Docker build is required every time a set of tests need to be released to run.
 
 
-<a id="org671eb97"></a>
+<a id="orgffd8a15"></a>
 
 ## The need for a global Playwright container image
 
 Hence, there is a legitimate need to be able create a Docker image for Playwright that encapsulates only the version of Playwright and its runtime
 environment, eg Ubuntu, and not bake in the tests. This image can then be used repeatedly on different test folders.
 
+It should also become clear that there is no contradiction between "Not installing Playwright globally in a general machine"
+and "Installing Playwright globally in a Docker container". The reason is because the latter is designed to house only one Node application, Playwright
+and no other. Thus there is no danger of package versioning hell when using the global Playwright container, unlike a general machine.
 
-<a id="org953f812"></a>
+
+<a id="orgecc910f"></a>
 
 # Solution
 
 
-<a id="org5b0ee72"></a>
+<a id="org5eed85f"></a>
 
 ## Development environment
 
 This project was developed on a Windows 10 machine, running Docker Desktop with containers set to Linux.
 
 
-<a id="orge1e32f7"></a>
+<a id="orgbeeaf7d"></a>
 
 ## Dockerfile and public image
 
@@ -79,7 +83,7 @@ explanation, please let me know. Thanks in advance! )
 The public globally installed Playwright image is available in DockerHub khtan1/pw4:v2
 
 
-<a id="org03d227a"></a>
+<a id="org220f87d"></a>
 
 ## Run script: run.bat
 
@@ -115,7 +119,7 @@ is available.
 The file run.transcript shows the results of one such invocation, so that you can compare with your own run.
 
 
-<a id="org49101bb"></a>
+<a id="orge19b341"></a>
 
 # References
 

@@ -28,6 +28,9 @@ seems inefficient as a Docker build is required every time a set of tests need t
 Hence, there is a legitimate need to be able create a Docker image for Playwright that encapsulates only the version of Playwright and its runtime
 environment, eg Ubuntu, and not bake in the tests. This image can then be used repeatedly on different test folders.
 
+It should also become clear that there is no contradiction between "Not installing Playwright globally in a general machine"
+and "Installing Playwright globally in a Docker container". The reason is because the latter is designed to house only one Node application, Playwright
+and no other. Thus there is no danger of package versioning hell when using the global Playwright container, unlike a general machine.
 * Solution
 
 ** Development environment
