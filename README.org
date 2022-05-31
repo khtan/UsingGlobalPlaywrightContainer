@@ -1,3 +1,4 @@
+#+OPTIONS: ^:nil
 * UsingGlobalPlaywrightContainer
 A proof of concept for using a Docker image where Playwright is installed globally
 
@@ -46,7 +47,22 @@ The public globally installed Playwright image is available in DockerHub khtan1/
 The run batch file illustrates how the pw4:v2 image is used to run Playwright tests in two folders on the host machine. On the
 host (Windows) machine, no installation of Playwright or its browsers are needed. 
 
-The folder 'testOnlyA' contains two test folders 'tests' and 'tests2'. Note that there are no node_modules
+The general idea is to :
+   1. cd to the root folder, {ROOTDIR} where the test folders are 'testOnlyA' and 'testOnlyB'
+   2. To run Playwright in an Ubuntu environment on testOnlyA :
+#+BEGIN_SRC cmd
+      docker run --volume {ROOTDIR}\testOnlyA:tests --rm --ipc=host tankh1/pw4:v2
+#+END_SRC
+   3. To run Playwright in an Ubuntu environment on testOnlyB :
+#+BEGIN_SRC cmd
+      docker run --volume {ROOTDIR}\testOnlyB:tests --rm --ipc=host tankh1/pw4:v2
+#+END_SRC
+   4. To debug the Playwright image on testOnlyA : 
+#+BEGIN_SRC cmd
+      docker run --volume {ROOTDIR}\testOnlyA:tests -it --rm --ipc=host tankh1/pw4:v2 /bin/bash
+#+END_SRC
+
+In the repo, the folder 'testOnlyA' contains two test folders 'tests' and 'tests2'. Note that there are no node_modules
 nor playwright.config.ts files. Only the package.json is present.
 
 The folder 'testOnlyB' is even simpler. There are no node_modules or package* files. Only the tests folder
