@@ -2,11 +2,11 @@
 echo "----------------------"
 echo "--- Tests in testOnlyA"
 echo "----------------------"
-set TT=C:\cprojects\github\khtan\globalPlaywrightContainer\testOnlyA
+set TT=%cd%\testOnlyA
 docker run --volume %TT%:/tests --rm --ipc=host tankh1/pw4:v2
 
 echo "----------------------"
 echo "--- Tests in testOnlyB
 echo "----------------------"
-set TT=C:\cprojects\github\khtan\globalPlaywrightContainer\testOnlyB
+set TT=%cd%\testOnlyB
 docker run --volume %TT%:/tests --rm --ipc=host tankh1/pw4:v2
