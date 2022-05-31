@@ -64,6 +64,10 @@ The general idea is to :
 #+BEGIN_SRC cmd
       docker run --volume {ROOTDIR}\testOnlyA:tests -it --rm --ipc=host tankh1/pw4:v2 /bin/bash
 #+END_SRC
+   5. To pass other arguments to the Playwright image on testOnlyA : 
+#+BEGIN_SRC cmd
+      docker run --volume {ROOTDIR}\testOnlyA:tests --rm --ipc=host tankh1/pw4:v2 playwright test --browsers=firefox
+#+END_SRC
 
 When running in a host tests folder, it is important to ensure there is no node_modules directory, otherwise the Docker Playwright
 might get confused.
