@@ -1,6 +1,10 @@
 #+OPTIONS: ^:nil
 * UsingGlobalPlaywrightContainer
-A proof of concept for using a Docker image where Playwright is installed globally
+This is a proof of concept for using a Docker image where Playwright is installed globally.
+1. The source Dockerfile is provided from which a public globally installed Playwright container is provided in DockerHub khtan1/pw4:v2.
+2. A sample folder of tests and run.bat script is used to show how the global Playwright container is used to run 
+   tests, without installing Playwright on the host. A run.transcript is provided so that users can compare their
+   own runs with one that worked.
 
 ** General reasons why a global Playwright container is not well received
 Before I discuss the project's purpose and proof of concept, it is best to start with the generally recognised
