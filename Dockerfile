@@ -1,6 +1,6 @@
 # version: 2
 # 1. Pull in the focal image from Playwright
-FROM mcr.microsoft.com/playwright:focal
+FROM mcr.microsoft.com/playwright:v1.22.0-focal
 
 # 2. Set the NODE_PATH for global install of Playwright
 # Q) In theory, it would be nice to emulate export NODE_PATH=$(npm root -g)
@@ -11,7 +11,7 @@ FROM mcr.microsoft.com/playwright:focal
 ENV NODE_PATH=/usr/lib/node_modules
 
 # 3. Install Playwright globally
-RUN npm install -g @playwright/test # Q) no need to install playwright, only playwright/test. why?
+RUN npm install -g @playwright/test@1.22 # Q) no need to install playwright, only playwright/test. why?
 
 # 4. Install Playwright browsers
 RUN npx playwright install
